@@ -29,7 +29,7 @@ func getGlobalFlags() []cli.Flag {
 			Name:  "log-level",
 			Usage: "log level used by the logger, one of: debug, info, warn, error",
 			// EnvVars: []string{"OTEL_LOG_LEVEL"},
-			Value: "info",
+			Value: "",
 		}),
 		altsrc.NewStringFlag(&cli.StringFlag{
 			Name:  "otel-exporter-otlp-endpoint",

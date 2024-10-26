@@ -3,7 +3,6 @@ package cli
 import (
 	"fmt"
 	"math/rand"
-	"time"
 
 	"github.com/fatih/color"
 	"github.com/urfave/cli/v2"
@@ -20,8 +19,18 @@ func initLogger(c *cli.Context) error {
 	switch c.String("log-level") {
 	case "debug":
 		cfg = zap.NewDevelopmentConfig()
+	case "info":
+		cfg = zap.NewDevelopmentConfig()
+		cfg.Level.SetLevel(zap.InfoLevel)
+	case "warn":
+		cfg = zap.NewDevelopmentConfig()
+		cfg.Level.SetLevel(zap.WarnLevel)
+	case "error":
+		cfg = zap.NewDevelopmentConfig()
+		cfg.Level.SetLevel(zap.ErrorLevel)
 	default:
 		cfg = zap.NewProductionConfig()
+		cfg.Level.SetLevel(zap.WarnLevel)
 	}
 	logger, err = cfg.Build()
 	if err != nil {
@@ -36,7 +45,7 @@ func initLogger(c *cli.Context) error {
 func New(version, commit, date string) *cli.App {
 	// Rainbow
 	c := []color.Attribute{color.FgRed, color.FgGreen, color.FgYellow, color.FgMagenta, color.FgCyan, color.FgWhite, color.FgHiRed, color.FgHiGreen, color.FgHiYellow, color.FgHiBlue, color.FgHiMagenta, color.FgHiCyan, color.FgHiWhite}
-	rand.Seed(time.Now().UnixNano())
+
 	rand.Shuffle(len(c), func(i, j int) { c[i], c[j] = c[j], c[i] })
 	c0 := color.New(c[0]).SprintFunc()
 	c1 := color.New(c[1]).SprintFunc()
