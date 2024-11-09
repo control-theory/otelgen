@@ -69,7 +69,7 @@ docker-build: ## Build Docker image
 	-t $(REPO)/$(BINARY_NAME) .
 
 docker-run: ## Run Docker container
-	docker run --rm $(BINARY_NAME)
+	docker run --rm $(REPO)/$(BINARY_NAME) $(filter-out $@,$(MAKECMDGOALS))
 
 push: ## build and Push Docker image
 	docker buildx build --platform linux/amd64,linux/arm64 \
