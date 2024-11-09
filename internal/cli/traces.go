@@ -101,7 +101,7 @@ func generateTraces(c *cli.Context, isSingle bool) error {
 		tracesCfg.Scenarios = []string{c.String("scenario")}
 		tracesCfg.PropagateContext = c.Bool("marshal")
 	} else {
-		tracesCfg.TotalDuration = time.Duration(c.Int("duration") * int(time.Second))
+		tracesCfg.TotalDuration = time.Duration(c.Duration("duration"))
 		tracesCfg.Rate = c.Int64("rate")
 		tracesCfg.NumTraces = c.Int("number-traces")
 		tracesCfg.WorkerCount = c.Int("workers")

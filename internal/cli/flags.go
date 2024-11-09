@@ -7,10 +7,11 @@ import (
 
 func getGlobalFlags() []cli.Flag {
 	return []cli.Flag{
-		altsrc.NewIntFlag(&cli.IntFlag{
+		altsrc.NewDurationFlag(&cli.DurationFlag{
 			Name:    "duration",
 			Aliases: []string{"d"},
-			Usage:   "duration in seconds",
+			Usage:   "duration in time.Duration string type (like 30s or 3m)",
+			EnvVars: []string{"OTEL_DURATION"},
 			Value:   0,
 		}),
 		altsrc.NewStringSliceFlag(&cli.StringSliceFlag{

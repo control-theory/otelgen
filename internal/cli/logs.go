@@ -76,7 +76,7 @@ func generateLogs(c *cli.Context, isSingle bool) error {
 	} else {
 		logsCfg.NumLogs = c.Int("number")
 		logsCfg.WorkerCount = c.Int("workers")
-		logsCfg.TotalDuration = time.Duration(c.Int("duration") * int(time.Second))
+		logsCfg.TotalDuration = time.Duration(c.Duration("duration"))
 		logsCfg.Rate = c.Float64("rate")
 
 		// If neither `NumLogs` nor `TotalDuration` is set, default to indefinite generation

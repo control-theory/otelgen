@@ -64,7 +64,7 @@ func generateMetricsExponentialHistogramAction(c *cli.Context) error {
 	}
 
 	metricsCfg := &metrics.Config{
-		TotalDuration: time.Duration(c.Int("duration") * int(time.Second)),
+		TotalDuration: time.Duration(c.Duration("duration")),
 		Endpoint:      c.String("otel-exporter-otlp-endpoint"),
 		Rate:          c.Int64("rate"),
 		ServiceName:   c.String("service-name"),
