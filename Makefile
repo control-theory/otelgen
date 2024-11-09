@@ -18,9 +18,10 @@ BUILD_DIR=./build
 
 # Source files
 SRC:=$(shell find . -name "*.go")
-BUILD_DATE:=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
+GIT_BRANCH:=$(shell git rev-parse --abbrev-ref HEAD)
+BUILD_DATE:=$(GIT_BRANCH)::$(shell date +"%D-%T:%s")
 COMMIT_ID:=$(shell git rev-parse --short=8 HEAD)
-BUILD_VERSION="0.1.0"
+BUILD_VERSION=$(shell git describe --tags --always --dirty)
 
 # Test coverage output
 COVERAGE_OUTPUT=coverage.out

@@ -48,7 +48,7 @@ func New(version, commit, date string) *cli.App {
 	if version == "" {
 		v = "develop"
 	} else {
-		v = fmt.Sprintf("v%v-%v (%v) (ct)", version, commit, date)
+		v = fmt.Sprintf(": %v commit: %v build: %v", version, commit, date)
 	}
 
 	app := &cli.App{
