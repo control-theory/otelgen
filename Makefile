@@ -18,18 +18,15 @@ BUILD_DIR=./build
 
 # Source files
 SRC:=$(shell find . -name "*.go")
-BUILD_DATE:=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ') 
-COMMIT_ID:=$(shell git rev-parse --short=8 HEAD) 
+BUILD_DATE:=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
+COMMIT_ID:=$(shell git rev-parse --short=8 HEAD)
 BUILD_VERSION="0.1.0"
 
 # Test coverage output
 COVERAGE_OUTPUT=coverage.out
 
-.PHONY: all build clean test coverage lint deps tidy run help
+.PHONY: build clean test coverage lint deps tidy run help
 
-all: build
-
-.PHONY: build
 build: $(BUILD_DIR)/$(BINARY_NAME) ## Build the application
 
 $(BUILD_DIR)/$(BINARY_NAME): $(SRC)
