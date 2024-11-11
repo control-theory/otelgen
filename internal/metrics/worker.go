@@ -43,10 +43,7 @@ func run(c *Config, logger *zap.Logger, workerFunc WorkerFunc) error {
 
 // Run runs the worker
 func (w *Worker) Run(ctx context.Context, workerFunc WorkerFunc) error {
-	if w.totalDuration == 0 {
-		// w.numMetrics = 0
-		w.totalDuration = 86400 * time.Second // 24 hours
-	} else if w.numMetrics == 0 {
+	if w.numMetrics == 0 && w.totalDuration.Seconds() == 0 {
 		w.logger.Error("either `metrics` or `duration` must be greater than 0")
 		return fmt.Errorf("either `metrics` or `duration` must be greater than 0")
 	}
@@ -62,7 +59,7 @@ func (w *Worker) Run(ctx context.Context, workerFunc WorkerFunc) error {
 		}()
 	}
 
-	if w.totalDuration > 0 {
+	if w.totalDuration.Seconds() > 0 {
 		w.logger.Info("generation duration", zap.Float64("seconds", w.totalDuration.Seconds()))
 		w.logger.Info("generation rate", zap.Float64("per second", float64(w.limitPerSecond)))
 		time.Sleep(w.totalDuration)

@@ -56,7 +56,7 @@ func BasicScenario(ctx context.Context, tracer trace.Tracer, logger *zap.Logger,
 
 	child.End()
 
-	logger.Info("Trace",
+	logger.Debug("Trace",
 		zap.String("traceId", sp.SpanContext().TraceID().String()),
 		zap.String("parentSpanId", sp.SpanContext().SpanID().String()),
 		zap.String("childSpanId", child.SpanContext().SpanID().String()),
